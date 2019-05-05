@@ -9,7 +9,7 @@
 #define STUDENT_H_
 
 #include <iostream>
-#include <string>
+#include "Helper.h"
 
 namespace stu {
 
@@ -30,6 +30,7 @@ public:
 	 * @brief			打印出学生信息
 	 */
 	void displsyStuInfo();
+
 	virtual ~Student();
 private:
 	int ID_;
