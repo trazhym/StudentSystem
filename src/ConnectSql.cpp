@@ -15,13 +15,14 @@ ConnectSql::ConnectSql() {
 
 }
 
-int ConnectSql::connect()const
+//连接mysql数据库,并且执行查询
+int ConnectSql::connect(string sqlString)const
 {
 	//连接mysql数据库
 	MYSQL mysql;
 
 	//查询放回结果集
-	MYSQL_RES *result;
+	MYSQL_RES* result;
 
 	//查询返回结果记录数
 	MYSQL_ROW row;
@@ -45,9 +46,7 @@ int ConnectSql::connect()const
 	{
 		cout<<"connect success"<<endl;
 	}
-	mysql_close(&mysql);                                 // 释放数据库连接</p>
-	string sql = "select * from Student";
-	if(mysql_query(&mysql,sql.c_str()) == false)
+	if(mysql_query(&mysql, sqlString.c_str()) == 1)
 	{
 		cout<<"查询数据失败"<<mysql_error(&mysql)<<endl;
 	}
@@ -61,13 +60,23 @@ int ConnectSql::connect()const
 			int numRows = mysql_num_rows(result);
 			int numFields = mysql_num_fields(result);
 			cout<<"一共"<<numRows<<"条数据"<<"每条数据"<<numFields<<"个字段"<<endl;
+			while((row = mysql_fetch_row(result)))
+			{
+				for(int i=0; i<numFields; i++)
+				{
+					cout<<row[i]<<"\t";
+				}
+			}
 		}
 		else
 		{
 			cout<<"查询数据为空，请添加数据到表内"<<endl;
 		}
+		mysql_free_result(result);
 
 	}
+	mysql_close(&mysql);                                 // 释放数据库连接</p>
+	mysql_server_end();
 	return SUCCESS;
 }
 ConnectSql::~ConnectSql() {

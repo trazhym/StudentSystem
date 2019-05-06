@@ -19,10 +19,13 @@ public:
 	ConnectSql();
 	/**
 	 * @brief				连接mysql数据库
+	 * @param[sqlString]	查询字符串
 	 */
-	int connect()const;
+	int connect(string sqlString)const;
+
 	virtual ~ConnectSql();
 };
+
 
 } /* namespace std */
 

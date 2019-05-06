@@ -5,7 +5,7 @@ using namespace stu;
 int main()
 {
 	ConnectSql con;
-	con.connect();
+	con.connect("select * from student");
 	return 0;
 }
 
