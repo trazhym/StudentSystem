@@ -18,10 +18,25 @@ class ConnectSql {
 public:
 	ConnectSql();
 	/**
-	 * @brief				连接mysql数据库
+	 * @brief				连接mysql数据库,并执行查询
 	 * @param[sqlString]	查询字符串
+	 * @param[vec]			查询结果存放到vector中
 	 */
-	int connect(string sqlString)const;
+	int connect(string sqlString, vector<string>& vec)const;
+
+	/**
+	 * 用户注册
+	 * @param[user]			用户名
+	 * @param[passwd]		密码
+	 */
+	void regist(string user, string passwd);
+
+	/**
+	 * 用户登录校验
+	 * @param[user]			用户名
+	 * @param[passwd]		密码
+	 */
+	int login(string user, string passwd);
 
 	virtual ~ConnectSql();
 };
